@@ -5,24 +5,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage
+public class UserPage
 {
     protected WebDriver driver;
 
-    private static final  String USER_PAGE_LOCATOR = "//div[@class='tico ellip']";
+    private static final  String FULL_NAME_LOCATOR = "//h1[contains(@class, 'user-profile-name')]";
 
-    @FindBy(xpath = USER_PAGE_LOCATOR)
-    private WebElement userPageLocator;
+    @FindBy(xpath = FULL_NAME_LOCATOR)
+    private WebElement fullNameLocator;
 
-    public HomePage(WebDriver driver)
+    public UserPage(WebDriver driver)
     {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
-    public UserPage goToUserPage()
+    public String getFullNameText()
     {
-        userPageLocator.click();
-        return new UserPage(driver);
+        return fullNameLocator.getText();
     }
 }

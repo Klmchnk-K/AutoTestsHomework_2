@@ -1,12 +1,10 @@
 package Tests;
 
 import Pages.SignInPage;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import Pages.SignOutPage;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest
@@ -26,6 +24,8 @@ public class BaseTest
 
         driver = new ChromeDriver();
 
+        driver.manage().window().maximize();
+
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
@@ -44,5 +44,11 @@ public class BaseTest
                 .inputUsername(TEST_USERNAME)
                 .inputPassword(TEST_PASSWORD)
                 .clickLoginButton();
+    }
+
+    @AfterEach
+    public void logout()
+    {
+        SignOutPage signOutPage = new SignOutPage(driver).signOut();
     }
 }
