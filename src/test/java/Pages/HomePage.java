@@ -9,19 +9,20 @@ public class HomePage
 {
     protected WebDriver driver;
 
-    private static final  String FULL_NAME_LOCATOR = "//h1[contains(@class, 'user-profile-name')]";
+    private static final  String USER_PAGE_LOCATOR = "//div[@class='tico ellip']";
 
-    @FindBy(xpath = FULL_NAME_LOCATOR)
-    private WebElement fullNameLocator;
+    @FindBy(xpath = USER_PAGE_LOCATOR)
+    private WebElement userPageLocator;
 
     public HomePage(WebDriver driver)
     {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
-
-    public String getFullNameText()
+    public UserPage goToUserPage()
     {
-        return fullNameLocator.getText();
+        userPageLocator.click();
+
+        return new UserPage(driver);
     }
 }
