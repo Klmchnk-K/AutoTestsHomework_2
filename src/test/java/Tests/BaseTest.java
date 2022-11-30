@@ -1,5 +1,6 @@
 package Tests;
 
+import Pages.HomePage;
 import Pages.SignInPage;
 import Pages.SignOutPage;
 import org.junit.jupiter.api.*;
@@ -24,19 +25,12 @@ public class BaseTest
 
         driver = new ChromeDriver();
 
-        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        login();
     }
 
-    @AfterAll
-    static void teardown()
-    {
-        driver.quit();
-    }
-
-    @BeforeEach
-    public void login()
+    static void login()
     {
         driver.get(OK_URL);
 
@@ -46,9 +40,22 @@ public class BaseTest
                 .clickLoginButton();
     }
 
-    @AfterEach
-    public void logout()
+    @AfterAll
+    static void logout()
     {
         SignOutPage signOutPage = new SignOutPage(driver).signOut();
+
+        teardown();
+    }
+
+    static void teardown()
+    {
+        driver.quit();
+    }
+
+    @BeforeEach
+    void startPoint()
+    {
+        HomePage homePage = new HomePage(driver).goToHomePage();
     }
 }

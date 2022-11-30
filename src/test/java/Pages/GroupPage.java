@@ -44,9 +44,13 @@ public class GroupPage
         return groupNameText.getText();
     }
 
-    public GroupPage addGroupToBookmarks()
+    public GroupPage openOptions()
     {
         optionsLocator.click();
+        return this;
+    }
+    public GroupPage addGroupToBookmarks()
+    {
         addToBookmarksLocator.click();
         return this;
     }

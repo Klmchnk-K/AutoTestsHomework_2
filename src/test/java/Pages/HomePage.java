@@ -10,9 +10,13 @@ public class HomePage
     protected WebDriver driver;
 
     private static final  String USER_PAGE_LOCATOR = "//div[@class='tico ellip']";
+    private static final  String HOME_PAGE_LOCATOR = "//div[@class = 'toolbar_logo_img']";
 
     @FindBy(xpath = USER_PAGE_LOCATOR)
     private WebElement userPageLocator;
+
+    @FindBy(xpath = HOME_PAGE_LOCATOR)
+    private WebElement homePageLocator;
 
     public HomePage(WebDriver driver)
     {
@@ -24,5 +28,11 @@ public class HomePage
     {
         userPageLocator.click();
         return new UserPage(driver);
+    }
+
+    public HomePage goToHomePage()
+    {
+        homePageLocator.click();
+        return new HomePage(driver);
     }
 }
